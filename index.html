@@ -11,7 +11,6 @@
             margin: 0;
             padding: 0;
         }
-
         table.container {
             width: 700px;
             margin: 60px auto;
@@ -19,7 +18,6 @@
             padding: 30px;
             background-color: #0a0a0a;
         }
-
         h1 {
             font-size: 28px;
             font-weight: normal;
@@ -27,18 +25,15 @@
             text-align: center;
             margin-bottom: 5px;
         }
-
         .tagline {
             text-align: center;
             font-size: 14px;
             color: #888;
             margin-bottom: 30px;
         }
-
         .section {
             margin-bottom: 25px;
         }
-
         .section-title {
             font-size: 16px;
             text-transform: uppercase;
@@ -47,20 +42,38 @@
             padding-bottom: 5px;
             margin-bottom: 10px;
         }
-
         code {
             color: #9bbcff;
         }
-
+        .query-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+        .query-table td {
+            padding: 5px 8px;
+            vertical-align: top;
+        }
+        .query-table tr:nth-child(odd) {
+            background-color: #0f0f0f;
+        }
+        .query-table td:first-child {
+            color: #9bbcff;
+            white-space: nowrap;
+            width: 1%;
+            padding-right: 20px;
+        }
+        .query-table td:last-child {
+            color: #888;
+        }
         a {
             color: #9bbcff;
             text-decoration: none;
         }
-
         a:hover {
             text-decoration: underline;
         }
-
         .footer {
             text-align: center;
             font-size: 11px;
@@ -69,13 +82,10 @@
         }
     </style>
 </head>
-
 <body>
-
 <table class="container">
     <tr>
         <td>
-
             <h1>MTGRESOLVER</h1>
             <div class="tagline">
                 authoritative dns for magic: the gathering
@@ -85,24 +95,48 @@
                 <div class="section-title">About</div>
                 mtgresolver is a custom authoritative DNS server.<br>
                 It serves Magic: The Gathering cards as TXT records.<br><br>
-
                 Each card name is a DNS label.<br>
                 Each rules text is returned by the zone.
             </div>
 
             <div class="section">
-                <div class="section-title">Example Query</div>
+                <div class="section-title">Querying a Card</div>
+                Query any card by its name, hyphenated, under <code>card.mtgresolver.com</code>.<br><br>
+                <code>dig TXT lightning-bolt.card.mtgresolver.com</code><br><br>
+                This returns all available fields: mana cost, type, rules text, and power/toughness or loyalty where applicable.
+            </div>
 
-                <code>
-                dig lightning-bolt.card.mtgresolver.com TXT<br>
-                </code>
+            <div class="section">
+                <div class="section-title">Field Prefixes</div>
+                You can request a specific field by prepending a prefix to the card name:
+                <table class="query-table">
+                    <tr>
+                        <td>dig TXT mana.lightning-bolt.card.mtgresolver.com</td>
+                        <td>mana cost</td>
+                    </tr>
+                    <tr>
+                        <td>dig TXT type.lightning-bolt.card.mtgresolver.com</td>
+                        <td>type line</td>
+                    </tr>
+                    <tr>
+                        <td>dig TXT text.lightning-bolt.card.mtgresolver.com</td>
+                        <td>oracle text</td>
+                    </tr>
+                    <tr>
+                        <td>dig TXT pt.tarmogoyf.card.mtgresolver.com</td>
+                        <td>power / toughness</td>
+                    </tr>
+                    <tr>
+                        <td>dig TXT loyalty.jace-the-mind-sculptor.card.mtgresolver.com</td>
+                        <td>starting loyalty</td>
+                    </tr>
+                </table>
             </div>
 
             <div class="section">
                 <div class="section-title">Philosophy</div>
                 DNS is a naming system.<br>
                 Magic has over 36000 cards.<br><br>
-
                 This project treats cards as subdomains.<br>
                 The authoritative source reveals their text.
             </div>
@@ -112,14 +146,8 @@
                 card data sourced from the amazing <a href="https://www.scryfall.com">scryfall</a><br>
                 ©2026 mtgresolver<br>
             </div>
-
         </td>
     </tr>
 </table>
-
 </body>
-
 </html>
-
-
-
